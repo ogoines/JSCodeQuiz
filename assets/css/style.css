@@ -1,0 +1,77 @@
+body {
+  background-color:  #ecf5ff; 
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+
+}
+
+h1
+ {
+  color:  #56a5eb;
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  color: #56a5eb;
+  font-family:sans-serif;
+}
+
+a:hover {
+  color: #99B8BF;
+
+}
+
+/*.btn:focus, .btn:active, .btn:visited {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #343a40;
+}
+*/
+
+.btn {
+  font-size: 1.4rem;
+  padding: .5rem .5rem;
+  width: 20rem;
+  text-align: center;
+  border: 0.1rem solid #56a5eb;
+  border-radius: .3rem;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: #56a5eb;
+  background-color: white;
+}
+
+.btn:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+
+
+
+#finalScore {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+span {
+  font-family: 'Archivo', sans-serif;
+}
+
+p {
+  font-family: 'Archivo', sans-serif;
+}
+
+#questionTitle {
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#answerCheck {
+  font-style: italic;
+  color: #4D5159;
+}
