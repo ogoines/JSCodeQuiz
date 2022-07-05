@@ -1,127 +1,109 @@
 
-//Document methods that link to  html for tracking quiz time
-var timerEl = document.getElementById("timer");
-var timeOut = document.getElementById("time-out");
-var timeRemaining = document.getElementById("time-remaining");
-var startQuiz = document.getElementById("start-btn");
-var startSection =  document.getElementById("start-section");
-//References elements in html
-
-//ref to total number of correct scores
-var score = document.getElementById("score");
-
-//ref to answer buttons
-var answer1 = document.getElementById("btn1");
-var answer2 = document.getElementById("btn2");
-var answer3 = document.getElementById("btn3");
-var answer4 = document.getElementById("btn4");
-
-//ref to back button
-var back= document.getElementById("back");
-//References elements in html
-var mainEl = document.getElementById('main');
-var choicesE1 = document.getElementsByClassName('answers');
+var timerEl = document.getElementById("quiz-timer");
+var timeLeft = document.getElementById("time-Left");
+var timesUp = document.getElementById("quiz-over");
+var highScore= document.getElementById("view-high-score");
 
 
-var numberCorrect =0;
-var numberQuestion =0;
-//var scoreResult;
-//var questionIndex = 0;
-// ref to question and title
-var questionSection = document.getElementById("question-section");
-var questionTitle = document.getElementById("question-title");
-var displayHighScore =  document.getElementById("view-highscore");
-var clearHighScore = document.getElementById("clear-highscore"); 
-
-//ref to list of top scores
-var TopScores = document.getElementById("top-scores");
-
-
-
+var quizInfo = document.getElementById("quiz-directions");
+var startQuiz= document.getElementById("start-quiz");
 
 //quiz object containing questions, answers and correct answer
-var questions = [
+const quiz = [
  {
    question: "Commonly used data types Do Not Include:",
-   answers:{
-       a: 'strings', 
-       b: 'booleans', 
-       c: 'alerts', 
-       d: 'numbers'
-   },  
-   correctAnswer: 'c'
+   answers:[
+       "A. string",
+       "B. booleans", 
+       "C. alerts", 
+       "D. numbers"
+      ],
+  correctAnswer: "C. alerts"
  },
  {
    question: "Arrays in Javascript can be used to store:",
-   answers:{
-        a: 'numbers and strings',
-        b: 'other arrays', 
-        c: 'booleans', 
-        d: 'all of the above'
-   },
-   correctAnswer: 'd'
+   answers:[
+       "A. numbers and strings",
+       "B. other arrays", 
+       "C. booleans", 
+       "D. all of the above"
+      ],
+    correctAnswer: "D. all of the above"
  }, 
  {
    question: "A very useful/tool during debugging for printer content to the debugger is:",
-   answers:{
-        a: 'Javascript',
-        b: 'console log',
-        c: 'for loops',    
-        d: 'terminal bash'
-  },
-   correctAnswer: 'd'
+   answers:[
+        "A. Javascript",
+        "B. console log",
+        "C. for loops",    
+        "D. terminal bash"
+      ],
+   correctAnswer: "D. terminal bash"
  },
  {
-   question: "String values must be enclosed with ______ when being assigned to variables",
-    answers:{    
-        a: 'commas', 
-        b: 'curly brackets', 
-        c: 'quotes', 
-        d: 'parenthesis'
-  },
-   correctAnswer: 'c'
+   question: "String values must be enclosed with ______ when being assigned to variables.",
+   answers:[    
+        "A. commas", 
+        "B. curly brackets", 
+        "C. quotes", 
+        "D. parenthesis"
+      ],
+   correctAnswer: "C. quotes"
  },
  {
    question: "The condition in an if/else statement is enclosed with ______.",
-    answers: {
-        a: 'parenthesis', 
-        b: 'curly brackets', 
-        c: 'parenthesis', 
-        d: 'square brackets'
-   },
-   correctAnswer: 'a'
+    answers: [        
+        "A. parenthesis", 
+        "B. curly brackets", 
+        "C. parenthesis", 
+        "D. square brackets"
+      ],
+   correctAnswer: "A. parenthesis"
  }
 ];
- 
+
+//links to elements in question container
+
+var questionContainer = document.getElementById("question-container");
+var questionAsked = document.getElementById("question");
+var answerA = document.getElementById("btn-0");
+var answerB = document.getElementById("btn-1");
+var answerC = document.getElementById("btn-2");
+var answerD = document.getElementById("btn-3");
+var checkAnswer = document.getElementById("check-answer");
+
+//links to elements in results section
+var  resultsContainer= document.getElementById("results-section");
+var userScore = document.getElementById("user-score");
+var  initialInput = document.getElementById("initial-input");
+var  userInitials = document.getElementById("btn-user-initials");
+var  highscoreContainer = document.getElementById("highscore-container");
+var  highscoreList = document.getElementById("highscore-list");
+var  backBtn = document.getElementById("btn-button");
+var  clearScoresBtn = document.getElementById("btn-clear-scores");
+
+var quizIndex = 0;
+//console.log(quiz[quizIndex].question);
+//console.log(quiz[quizIndex].answers);
 
 
 
 
-
-function displayQuestions(questions, quizContainer){
-  //stores output and selected answer
-  var output = [];
-  var answers;
-  function showQuestions(questions, quizContainer){
-    // we'll need a place to store the output and the answer choices
-    var output = [];
-    var answers;
-  
-    // for each question...
-    for(var i=0; i<questions.length; i++){
-      
-      // first reset the list of answers
-      answers = [];
-  
-      // for each available answer to this question...
-      for(letter in questions[i].answers){ 
-  
+function displayQuestion() {
+  questionAsked.textContent = quiz[quizIndex].question;
+  answerA.textContent = quiz[quizIndex].answers[0];
+  answerB.textContent = quiz[quizIndex].answers[1];
+  answerC.textContent = quiz[quizIndex].answers[2];
+  answerD.textContent = quiz[quizIndex].answers[3];
 }
 
+console.log("answerD");
 
-// Timer that counts down from 75
+
+
+// Timer that counts 
 function countdown() {
-  var timeLeft = 8;
+ var timeLeft = 8;
 
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
   var timeInterval = setInterval(function () {
@@ -137,12 +119,10 @@ function countdown() {
       timeLeft--;
     } else {
       // Once `timeLeft` gets to 0, set `timerEl` to an empty string
-      timerEl.textContent = '';
+      timerEl.textContent = "Time's up!!!";
       // Use `clearInterval()` to stop the timer
       clearInterval(timeInterval);
-      // Call the `displayMessage()` function
-      displayMessage();
     }
   }, 1000);
 }
-
+countdown();

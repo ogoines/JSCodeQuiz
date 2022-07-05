@@ -35,17 +35,17 @@ a:hover {
   padding: .5rem .5rem;
   width: 20rem;
   text-align: center;
-  border: 0.1rem solid #56a5eb;
+  border: 0.1rem solid  #56a5eb;
   border-radius: .3rem;
   margin-bottom: 1rem;
   text-decoration: none;
-  color: #56a5eb;
-  background-color: white;
+  color:  #2b6ea9;
+  background-color: rgb(192, 204, 219);
 }
 
 .btn:hover {
   cursor: pointer;
-  box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(2, 30, 44, 0.5);
   transform: translateY(-0.1rem);
   transition: transform 150ms;
 }
